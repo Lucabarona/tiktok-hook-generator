@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viral TikTok Hook Generator</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white min-h-screen flex flex-col items-center justify-center p-4 selection:bg-pink-500 selection:text-white">
+
+<div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+
+<div class="absolute -top-24 -right-24 w-48 h-48 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-24 w-48 h-48 bg-violet-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+<div class="text-center mb-5 relative z-10">
+<span class="bg-pink-500/10 text-pink-400 text-xs font-semibold px-3 py-1 rounded-full border border-pink-500/20">
+AI-Powered Creator Suite 🚀
+</span>
+<h1 class="text-2xl font-black mt-3 bg-gradient-to-r from-pink-400 to-violet-400 bg-clip-text text-transparent">
+TikTok Hook Generator
+</h1>
+<p class="text-slate-400 text-xs mt-1">
+Stop the scroll. Real AI-generated hooks in 2 seconds.
+</p>
+</div>
+
+<div class="space-y-3.5 relative z-10">
+<div>
+<div class="flex justify-between items-center mb-1">
+<label class="block text-xs font-medium text-slate-300">What is your video about?</label>
+<button onclick="surpriseMe()" type="button" class="text-[10px] text-pink-400 hover:text-pink-300 font-semibold transition">
+✨ Surprise Me!
+</button>
+</div>
+<input type="text" id="topicInput" placeholder="e.g., Financial tips for college students"
+class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-pink-500 transition">
+</div>
+
+<div>
+<label class="block text-xs font-medium text-slate-300 mb-1">Choose Vibe / Angle</label>
+<select id="vibeSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-pink-500 transition">
+<option value="Curiosity Gap & Secret Reveal">🔥 Curiosity Gap & Secret Reveal</option>
+<option value="Controversial & Contrarian">⚔️ Controversial & Contrarian</option>
+<option value="High Value & Educational">💡 High Value & Educational</option>
+</select>
+</div>
+
+<button onclick="generateHooks()" id="submitBtn"
+class="w-full bg-gradient-to-r from-pink-600 to-violet-600 hover:from-pink-500 hover:to-violet-500 font-bold text-sm py-3 rounded-xl transition-all shadow-lg shadow-pink-600/20 active:scale-[0.98]">
+Generate Viral Hooks
+</button>
+</div>
+
+<div id="resultContainer" class="mt-5 hidden relative z-10">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400">Your AI Hooks:</span>
+<span id="counterBadge" class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">Free uses left: 3</span>
+</div>
+
+<div id="outputBox" class="bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-slate-200 text-xs leading-relaxed whitespace-pre-line font-mono"></div>
+
+<div class="flex gap-2 mt-3">
+<button onclick="copyHooks()" id="copyBtn"
+class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs py-2 rounded-lg transition">
+📋 Copy All
+</button>
+<button onclick="generateHooks()"
+class="flex-1 bg-slate-800 hover:bg-slate-700 text-pink-400 font-semibold text-xs py-2 rounded-lg transition border border-pink-500/20">
+🔄 Try Different
+</button>
+</div>
+</div>
+
+<!-- Blocco di pagamento a 1 Euro (Inseriremo qui il link di Lemon Squeezy) -->
+<div id="paywallContainer" class="mt-5 hidden relative z-10 bg-gradient-to-b from-slate-900 to-pink-950/30 border border-pink-500/30 rounded-xl p-4 text-center">
+<h3 class="text-sm font-bold text-white">🔥 Free Trial Ended!</h3>
+<p class="text-slate-400 text-xs mt-1 mb-3">You've reached your free limit. Unlock unlimited generations forever for just €1.</p>
+<a href="IL_TUO_LINK_DI_PAGAMENTO_LEMON_SQUEEZY" id="payButton"
+class="block w-full bg-pink-600 hover:bg-pink-500 text-white font-bold text-xs py-2.5 rounded-lg transition shadow-lg shadow-pink-600/30">
+Unlock Unlimited Access — €1 🔓
+</a>
+</div>
+
+<div class="mt-5 pt-3 border-t border-slate-800/80 text-center relative z-10">
+<p class="text-[10px] text-slate-500">
+⚡ Over <span class="text-slate-400 font-semibold">18,400+</span> hooks generated this week by global creators.
+</p>
+</div>
+</div>
+
+<script>
+let freeUses = localStorage.getItem('freeUses') ? parseInt(localStorage.getItem('freeUses')) : 3;
+
+const surpriseTopics = [
+"AI tools that feel illegal to know",
+"Habits that completely ruined my productivity",
+"Hidden budget travel hacks for Europe",
+"Secret psychology tricks to win any argument",
+"Beginner crypto mistakes to avoid in 2026"
+ ];
+
+function surpriseMe() {
+const randomTopic = surpriseTopics[Math.floor(Math.random() * surpriseTopics.length)];
+document.getElementById('topicInput').value = randomTopic;
+}
+
+async function generateHooks() {
+const topic = document.getElementById('topicInput').value;
+const vibe = document.getElementById('vibeSelect').value;
+const btn = document.getElementById('submitBtn');
+const resultContainer = document.getElementById('resultContainer');
+const outputBox = document.getElementById('outputBox');
+const counterBadge = document.getElementById('counterBadge');
+const paywallContainer = document.getElementById('paywallContainer');
+
+if (!topic.trim()) {
+alert('Please enter a topic or click "Surprise Me!"');
+return;
+}
+
+if (freeUses <= 0) {
+resultContainer.classList.add('hidden');
+paywallContainer.classList.remove('hidden');
+return;
+}
+
+freeUses--;
+localStorage.setItem('freeUses', freeUses);
+
+btn.disabled = true;
+btn.innerText = 'Connecting to AI... ⏳';
+resultContainer.classList.remove('hidden');
+paywallContainer.classList.add('hidden');
+outputBox.innerText = 'Consulting viral growth algorithms...';
+counterBadge.innerText = Free uses left: ${freeUses};
+
+try {
+const response = await fetch('/.netlify/functions/generate', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ topic, vibe })
+});
+
+const data = await response.json();
+
+if (response.ok) {
+outputBox.innerText = data.result;
+} else {
+outputBox.innerText = 'Error: ' + (data.error || 'Something went wrong.');
+}
+} catch (error) {
+outputBox.innerText = 'Connection error. Please try again.';
+console.error(error);
+} finally {
+btn.disabled = false;
+btn.innerText = 'Generate Viral Hooks';
+}
+}
+
+function copyHooks() {
+const outputText = document.getElementById('outputBox').innerText;
+navigator.clipboard.writeText(outputText);
+const copyBtn = document.getElementById('copyBtn');
+copyBtn.innerText = '✨ Copied to Clipboard!';
+setTimeout(() => {
+copyBtn.innerText = '📋 Copy All';
+}, 2000);
+}
+</script>
+</body>
+</html>
