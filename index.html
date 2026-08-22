@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Hook Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b0f19;
+            color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #151c2c;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            max-width: 520px;
+            width: 100%;
+            border: 1px solid #1e293b;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .badge {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .uses-badge {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid #334155;
+        }
+        h1 { font-size: 26px; margin: 0 0 5px 0; color: #fff; }
+        .subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 20px; }
+        
+        /* Lista dei benefici con spunte verdi */
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+            text-align: left;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .benefits-list li {
+            font-size: 13px;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .benefits-list li:last-child {
+            margin-bottom: 0;
+        }
+        .benefits-list li::before {
+            content: "✅";
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #cbd5e1; text-align: left; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: #fff;
+            font-size: 15px;
+            box-sizing: border-box;
+            outline: none;
+        }
+        input:focus, select:focus { border-color: #6366f1; }
+        .btn-primary {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+        .results-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #38bdf8;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        .results-box {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: left;
+            min-height: 100px;
+            color: #e2e8f0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .btn-secondary {
+            flex: 1;
+            background: #334155;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .paywall-box {
+            background: #1e1b2e;
+            border: 1px solid #7c3aed;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .paywall-box h3 { color: #f472b6; margin-top: 0; }
+        .btn-stripe {
+            background: #db2777;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" style="text-align: center;">
+        <div id="uses-badge" class="uses-badge">Pro Access 🔒</div>
+        <div class="badge">AI-Powered Creator Suite 🚀</div>
+        <h1>TikTok Hook Generator</h1>
+        <div class="subtitle">Stop the scroll. Real AI-generated hooks in 2 seconds.</div>
+
+        <!-- Lista dei vantaggi aggiunta -->
+        <ul class="benefits-list">
+            <li>Pattern interrupt (per catturare subito l'attenzione)</li>
+            <li>Trigger psicologici per aumentare l'engagement</li>
+            <li>Curiosity gap che spingono a cliccare</li>
+            <li>Parole potenti che stimolano l'azione</li>
+            <li>Strutture di ganci testate che vanno a segno</li>
+        </ul>
+
+        <div id="generator-section" style="display:none;">
+            <div class="input-group">
+                <label>What is your video about?</label>
+                <input type="text" id="topic" placeholder="Es. Business, Fitness, Crypto...">
+            </div>
+
+            <div class="input-group">
+                <label>Choose Vibe / Angle</label>
+                <select id="vibe">
+                    <option value="Curiosity">🔥 Curiosity Gap & Secret Reveal</option>
+                    <option value="Educational">💡 High Value & Educational</option>
+                    <option value="Contrarian">⚡ Controversial & Contrarian</option>
+                </select>
+            </div>
+
+            <button id="gen-btn" class="btn-primary" onclick="generateHooksAI()">Generate Viral Hooks</button>
+
+            <div id="results-container" style="display:none;">
+                <div class="results-header">✨ YOUR AI HOOKS & HASHTAGS:</div>
+                <div id="results" class="results-box"></div>
+                <div class="action-buttons">
+                    <button class="btn-secondary" onclick="copyHooks()">📋 Copy All</button>
+                    <button class="btn-secondary" onclick="generateHooksAI()">🔄 Try Different</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="paywall-section" class="paywall-box">
+            <h3>🔒 Accesso Riservato ai Creator</h3>
+            <p style="color: #94a3b8; font-size: 14px;">Sblocca l'accesso illimitato al generatore di hook virali per sempre a soli 2,00 €.</p>
+            <a href="https://buy.stripe.com/4gMbJ23mA6FP3Hg8Wi0VO01" class="btn-stripe">Unlock Unlimited Access — €2.00 🚀</a>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Controllo sblocco VIP via Stripe o link segreto
+        if (urlParams.get('payment') === 'success' || urlParams.get('vip') === 'lucabaronasegreto' || urlParams.get('unlocked') === 'true') {
+            localStorage.setItem('tiktok_vip_access', 'true');
+            
+            // Nasconde ?payment=success dalla barra degli indirizzi
+            window.history.replaceState({}, document.title, window.location.pathname);
+
+            // Mostra un avviso di conferma all'utente
+            alert("🎉 Accesso VIP attivato con successo! Salva questa pagina tra i preferiti.");
+        }
+
+        const hasVipAccess = localStorage.getItem('tiktok_vip_access') === 'true';
+
+        if (hasVipAccess) {
+            document.getElementById('generator-section').style.display = 'block';
+            document.getElementById('paywall-section').style.display = 'none';
+            document.getElementById('uses-badge').innerText = 'VIP Access 🌟';
+        } else {
+            document.getElementById('generator-section').style.display = 'none';
+            document.getElementById('paywall-section').style.display = 'block';
+            document.getElementById('uses-badge').innerText = 'Pro Locked 🔒';
+        }
+
+        async function generateHooksAI() {
+            const topic = document.getElementById('topic').value.trim();
+            const vibe = document.getElementById('vibe').value;
+            const btn = document.getElementById('gen-btn');
+            const resultsBox = document.getElementById('results');
+            const resultsContainer = document.getElementById('results-container');
+
+            if (!topic) {
+                alert("Inserisci l'argomento del tuo video TikTok!");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "L'IA sta scrivendo...";
+            resultsContainer.style.display = 'block';
+            resultsBox.innerText = "Attendere generazione intelligente in corso...";
+
+            try {
+                const response = await fetch('/api/openai-hook', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ topic, vibe })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultsBox.innerText = data.hooks;
+                } else {
+                    resultsBox.innerText = data.error || "Errore durante la generazione.";
+                }
+            } catch (err) {
+                resultsBox.innerText = "Errore di connessione con il server IA.";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Generate Viral Hooks";
+            }
+        }
+
+        function copyHooks() {
+            const text = document.getElementById('results').innerText;
+            navigator.clipboard.writeText(text).then(() => { alert("Copiati negli appunti!"); });
+        }
+    </script>
+</body>
+</html>
